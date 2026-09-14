@@ -1,5 +1,7 @@
 # LLM Localization QA Lab
 
+**Project page:** https://guilhermetavo.github.io/llm-localization-qa-lab/
+
 A practical AI Quality portfolio project focused on evaluating Large Language Model (LLM) responses for Brazilian Portuguese localization, translation quality, tone, cultural fit, support readiness and regional language accuracy.
 
 ## Project Objective
@@ -27,7 +29,18 @@ The current version includes a completed manual pilot evaluation with:
 - localization QA report;
 - localization readiness report;
 - Python script for metrics analysis;
+- GitHub Pages-ready landing page;
 - project summary for recruiters.
+
+## Quick Links
+
+- [Project page](https://guilhermetavo.github.io/llm-localization-qa-lab/)
+- [Evaluation plan](evaluation-plan.md)
+- [Localization rubric](methodology/localization-rubric.md)
+- [Localization report](results/localization-report.md)
+- [Readiness report](results/localization-readiness-report.md)
+- [Defect log](results/defect-log.csv)
+- [Recruiter summary](docs/project-summary.md)
 
 ## Pilot Results
 
@@ -40,7 +53,7 @@ The current version includes a completed manual pilot evaluation with:
 | Open Defects | 4 |
 | High Severity Defects | 3 |
 | Medium Severity Defects | 1 |
-| Localization Verdict | Blocked for pt-BR release |
+| Localization Verdict | Blocked for PT-BR release |
 
 > Integrity note: this is a controlled manual pilot response set created to demonstrate the evaluation workflow. It should not be presented as an official benchmark of a named model unless future responses are collected directly from named models with reproducible run details.
 
@@ -145,6 +158,7 @@ llm-localization-qa-lab/
 │   └── analyze_localization_results.py
 │
 └── docs/
+    ├── index.html
     └── project-summary.md
 ```
 
@@ -183,7 +197,6 @@ This project demonstrates practical skills relevant to AI Quality, LLM Evaluatio
 
 Planned improvements:
 
-- add a GitHub Pages landing page;
 - create a recruiter-facing interview guide;
 - compare outputs from two different models;
 - add retest results after localization fixes;
