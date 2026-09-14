@@ -1,0 +1,2 @@
+defect_id,test_case_id,severity,status,issue_type,expected_behavior,actual_behavior,user_impact,suggested_fix
+LOCBUG-001,,,,,,,,
