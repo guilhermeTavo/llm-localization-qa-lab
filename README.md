@@ -30,7 +30,8 @@ The current version includes a completed manual pilot evaluation with:
 - localization readiness report;
 - Python script for metrics analysis;
 - GitHub Pages-ready landing page;
-- project summary for recruiters.
+- project summary for recruiters;
+- interview guide for explaining the project.
 
 ## Quick Links
 
@@ -41,6 +42,7 @@ The current version includes a completed manual pilot evaluation with:
 - [Readiness report](results/localization-readiness-report.md)
 - [Defect log](results/defect-log.csv)
 - [Recruiter summary](docs/project-summary.md)
+- [Interview guide](docs/interview-guide.md)
 
 ## Pilot Results
 
@@ -110,6 +112,16 @@ See:
 results/localization-readiness-report.md
 ```
 
+## How to Explain This Project
+
+For interview preparation, see:
+
+```text
+docs/interview-guide.md
+```
+
+The guide includes a 30-second explanation, a 2-minute explanation, a STAR answer, key defects to discuss and recruiter questions.
+
 ## How to Run the Analysis
 
 From the project root, run:
@@ -159,7 +171,8 @@ llm-localization-qa-lab/
 │
 └── docs/
     ├── index.html
-    └── project-summary.md
+    ├── project-summary.md
+    └── interview-guide.md
 ```
 
 ## Test Coverage
@@ -197,7 +210,6 @@ This project demonstrates practical skills relevant to AI Quality, LLM Evaluatio
 
 Planned improvements:
 
-- create a recruiter-facing interview guide;
 - compare outputs from two different models;
 - add retest results after localization fixes;
 - expand the suite to 40+ test cases.
