@@ -6,250 +6,106 @@
   <title>LLM Localization QA Lab | Guilherme Tavares</title>
   <meta name="description" content="Brazilian Portuguese localization QA portfolio project covering LLM evaluation, translation quality, terminology, tone, cultural fit and release readiness." />
   <style>
-    /* Hallmark · macrostructure: translation proof sheet · genre: Swiss editorial / QA board · theme: custom
-     * pre-emit critique: P5 H5 E5 S5 R5 V5
-     * slop-audit: no SaaS hero, no status-card clone, no glass, no gradients, no centered headline, no repeated feature cards.
+    /* Hallmark · macrostructure: translation proof sheet · genre: Swiss editorial / QA board
+     * responsive pass: title constrained inside grid at desktop and stacked safely on mobile
      */
     :root {
-      --bg: #f1efe8;
-      --paper: #fbfaf6;
-      --ink: #111111;
-      --muted: #5c5c56;
-      --line: #181818;
-      --soft: #d7d3c8;
-      --red: #c7352d;
-      --blue: #2158a8;
-      --green: #2f6c50;
-      --yellow: #e8c84b;
-      --sans: Arial, Helvetica, sans-serif;
-      --mono: "Courier New", Courier, monospace;
+      --bg:#f1efe8; --paper:#fbfaf6; --ink:#111; --muted:#5c5c56;
+      --line:#181818; --soft:#d7d3c8; --red:#c7352d; --blue:#2158a8;
+      --green:#2f6c50; --yellow:#e8c84b;
+      --sans:Arial,Helvetica,sans-serif; --mono:"Courier New",Courier,monospace;
     }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink)}
+    body{font-family:var(--sans);line-height:1.45;overflow-x:hidden}
+    a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+    .sheet{width:min(1280px,calc(100% - 28px));margin:14px auto;background:var(--paper);border:1px solid var(--line);overflow:hidden}
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--bg); color: var(--ink); }
-    body { font-family: var(--sans); line-height: 1.45; overflow-x: clip; }
-    a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .utility{display:grid;grid-template-columns:1fr auto;gap:18px;padding:12px 16px;border-bottom:1px solid var(--line);font:12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.04em}
+    .utility nav{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end}
 
-    .sheet {
-      width: min(1280px, calc(100% - 28px));
-      margin: 14px auto;
-      background: var(--paper);
-      border: 1px solid var(--line);
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-bottom:1px solid var(--line);align-items:stretch}
+    .hero-copy{min-width:0;padding:clamp(28px,5vw,60px);border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .hero-copy>div:first-child{min-width:0}
+    .stamp{display:inline-block;width:fit-content;padding:7px 9px;border:1px solid var(--line);font:12px/1 var(--mono);background:var(--yellow);transform:rotate(-1.2deg)}
+
+    h1{margin:26px 0 22px;max-width:100%;font-size:clamp(3rem,6.3vw,6.6rem);line-height:.88;letter-spacing:-.065em;font-weight:800;text-transform:uppercase;overflow-wrap:anywhere;word-break:normal}
+    .summary{max-width:760px;margin:0;font-size:clamp(1.05rem,1.8vw,1.4rem)}
+    .hero-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;border:1px solid var(--line)}
+    .hero-meta div{min-width:0;padding:12px;border-right:1px solid var(--line)}
+    .hero-meta div:last-child{border-right:0}
+    .hero-meta b{display:block;font:12px/1.2 var(--mono);margin-bottom:5px;text-transform:uppercase}
+
+    .scoreboard{display:grid;grid-template-rows:auto 1fr auto;min-width:0}
+    .score-title{padding:14px;border-bottom:1px solid var(--line);font:12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--blue);color:#fff}
+    .score-grid{display:grid;grid-template-columns:1fr 1fr}
+    .metric{padding:20px 16px;min-height:118px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .metric:nth-child(even){border-right:0}
+    .metric span{font:11px/1.2 var(--mono);text-transform:uppercase}
+    .metric strong{font-size:2.1rem;line-height:1}
+    .verdict{padding:18px 16px;background:var(--red);color:#fff;border-top:1px solid var(--line)}
+    .verdict small{display:block;font:11px/1.2 var(--mono);text-transform:uppercase;margin-bottom:7px}
+    .verdict strong{font-size:1.2rem;line-height:1.1}
+
+    .band{display:grid;grid-template-columns:210px minmax(0,1fr);border-bottom:1px solid var(--line)}
+    .band-label{padding:18px 14px;border-right:1px solid var(--line);font:12px/1.25 var(--mono);text-transform:uppercase;color:var(--muted)}
+    .band-body{min-width:0;padding:clamp(26px,4vw,52px)}
+    h2{margin:0 0 24px;font-size:clamp(2rem,4vw,4.4rem);line-height:.95;letter-spacing:-.05em;text-transform:uppercase;overflow-wrap:anywhere}
+    .lead{max-width:820px;font-size:1.12rem}
+
+    .proofs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+    .proof{background:var(--paper);padding:18px;min-height:185px;position:relative;min-width:0}
+    .proof .id{font:11px/1.2 var(--mono);color:var(--muted);margin-bottom:20px;padding-right:60px}
+    .proof .bad{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+    .proof .good{color:var(--green);font-weight:700}
+    .proof p{margin:0 0 10px;overflow-wrap:anywhere}
+    .proof .sev{position:absolute;right:12px;top:12px;font:10px/1 var(--mono);border:1px solid var(--line);padding:5px 6px}
+
+    .coverage-list{border-top:1px solid var(--line)}
+    .coverage-row{display:grid;grid-template-columns:220px minmax(0,1fr) 110px;gap:16px;padding:15px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+    .coverage-row span{color:var(--muted)}
+    .coverage-row code{text-align:right;font:11px/1.2 var(--mono)}
+
+    .process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line)}
+    .process article{padding:18px;min-height:180px;border-right:1px solid var(--line);min-width:0}
+    .process article:last-child{border-right:0}
+    .process b{display:block;font:12px/1.2 var(--mono);color:var(--blue);margin-bottom:28px}
+    .process h3{margin:0 0 10px;font-size:1.25rem}
+    .process p{margin:0;color:var(--muted)}
+
+    .links{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}
+    .links a{padding:18px;border-right:1px solid var(--line);text-decoration:none;font-weight:700;overflow-wrap:anywhere}
+    .links a:last-child{border-right:0}.links a:hover{background:var(--yellow)}
+    footer{display:flex;justify-content:space-between;gap:16px;padding:18px 16px 22px;font:12px/1.3 var(--mono);text-transform:uppercase}
+
+    @media (max-width:1050px){
+      .hero{grid-template-columns:minmax(0,1fr) 300px}
+      h1{font-size:clamp(2.8rem,6vw,5.2rem)}
     }
-
-    .utility {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      font: 12px/1.3 var(--mono);
-      text-transform: uppercase;
-      letter-spacing: .04em;
+    @media (max-width:860px){
+      .hero{grid-template-columns:1fr}
+      .hero-copy{border-right:0;border-bottom:1px solid var(--line)}
+      h1{font-size:clamp(3rem,11vw,6rem);max-width:10ch}
+      .band{grid-template-columns:1fr}.band-label{border-right:0;border-bottom:1px solid var(--line)}
+      .process{grid-template-columns:1fr 1fr}.process article:nth-child(2){border-right:0}.process article:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .links{grid-template-columns:1fr 1fr}.links a:nth-child(2){border-right:0}.links a:nth-child(-n+2){border-bottom:1px solid var(--line)}
     }
-
-    .utility nav { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
-      min-height: 520px;
-      border-bottom: 1px solid var(--line);
+    @media (max-width:620px){
+      .sheet{width:calc(100% - 12px);margin:6px auto}
+      .utility{grid-template-columns:1fr}.utility nav{justify-content:flex-start}
+      .hero-copy{padding:24px 18px}
+      h1{font-size:clamp(2.55rem,14vw,4.4rem);line-height:.9;letter-spacing:-.055em;max-width:100%;margin-top:22px}
+      .summary{font-size:1rem}
+      .hero-meta{grid-template-columns:1fr;margin-top:28px}.hero-meta div{border-right:0;border-bottom:1px solid var(--line)}.hero-meta div:last-child{border-bottom:0}
+      .score-grid{grid-template-columns:1fr 1fr}.metric{min-height:96px}.metric strong{font-size:1.8rem}
+      .proofs{grid-template-columns:1fr}
+      .coverage-row{grid-template-columns:1fr;gap:5px}.coverage-row code{text-align:left}
+      .process,.links{grid-template-columns:1fr}.process article,.links a{border-right:0;border-bottom:1px solid var(--line)}.process article:last-child,.links a:last-child{border-bottom:0}
+      footer{flex-direction:column}
     }
-
-    .hero-copy {
-      padding: clamp(28px, 5vw, 68px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-right: 1px solid var(--line);
-    }
-
-    .stamp {
-      display: inline-block;
-      width: fit-content;
-      padding: 7px 9px;
-      border: 1px solid var(--line);
-      font: 12px/1 var(--mono);
-      background: var(--yellow);
-      transform: rotate(-1.2deg);
-    }
-
-    h1 {
-      margin: 26px 0 20px;
-      max-width: 900px;
-      font-size: clamp(3.4rem, 8vw, 8.8rem);
-      line-height: .84;
-      letter-spacing: -.075em;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .hero-copy .summary {
-      max-width: 760px;
-      margin: 0;
-      font-size: clamp(1.05rem, 1.8vw, 1.45rem);
-    }
-
-    .hero-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0;
-      margin-top: 42px;
-      border: 1px solid var(--line);
-    }
-
-    .hero-meta div { padding: 12px; border-right: 1px solid var(--line); }
-    .hero-meta div:last-child { border-right: 0; }
-    .hero-meta b { display: block; font: 12px/1.2 var(--mono); margin-bottom: 5px; text-transform: uppercase; }
-
-    .scoreboard { display: grid; grid-template-rows: auto 1fr auto; }
-    .score-title {
-      padding: 14px;
-      border-bottom: 1px solid var(--line);
-      font: 12px/1.2 var(--mono);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      background: var(--blue);
-      color: white;
-    }
-    .score-grid { display: grid; grid-template-columns: 1fr 1fr; }
-    .metric {
-      padding: 20px 16px;
-      min-height: 118px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .metric:nth-child(even) { border-right: 0; }
-    .metric span { font: 11px/1.2 var(--mono); text-transform: uppercase; }
-    .metric strong { font-size: 2.25rem; line-height: 1; }
-    .verdict {
-      padding: 18px 16px;
-      background: var(--red);
-      color: white;
-      border-top: 1px solid var(--line);
-    }
-    .verdict small { display: block; font: 11px/1.2 var(--mono); text-transform: uppercase; margin-bottom: 7px; }
-    .verdict strong { font-size: 1.35rem; line-height: 1.05; }
-
-    .band {
-      display: grid;
-      grid-template-columns: 210px minmax(0, 1fr);
-      border-bottom: 1px solid var(--line);
-    }
-    .band-label {
-      padding: 18px 14px;
-      border-right: 1px solid var(--line);
-      font: 12px/1.25 var(--mono);
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .band-body { padding: clamp(26px, 4vw, 52px); }
-
-    h2 {
-      margin: 0 0 24px;
-      font-size: clamp(2rem, 4vw, 4.6rem);
-      line-height: .95;
-      letter-spacing: -.055em;
-      text-transform: uppercase;
-    }
-
-    .lead { max-width: 820px; font-size: 1.12rem; }
-
-    .proofs {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-    .proof {
-      background: var(--paper);
-      padding: 18px;
-      min-height: 185px;
-      position: relative;
-    }
-    .proof .id { font: 11px/1.2 var(--mono); color: var(--muted); margin-bottom: 20px; }
-    .proof .bad { text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
-    .proof .good { color: var(--green); font-weight: 700; }
-    .proof p { margin: 0 0 10px; }
-    .proof .sev { position: absolute; right: 12px; top: 12px; font: 10px/1 var(--mono); border: 1px solid var(--line); padding: 5px 6px; }
-
-    .coverage-list { border-top: 1px solid var(--line); }
-    .coverage-row {
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr) 110px;
-      gap: 16px;
-      padding: 15px 0;
-      border-bottom: 1px solid var(--soft);
-      align-items: baseline;
-    }
-    .coverage-row b { font-size: 1.05rem; }
-    .coverage-row span { color: var(--muted); }
-    .coverage-row code { text-align: right; font: 11px/1.2 var(--mono); }
-
-    .process { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
-    .process article { padding: 18px; min-height: 180px; border-right: 1px solid var(--line); }
-    .process article:last-child { border-right: 0; }
-    .process b { display: block; font: 12px/1.2 var(--mono); color: var(--blue); margin-bottom: 28px; }
-    .process h3 { margin: 0 0 10px; font-size: 1.25rem; }
-    .process p { margin: 0; color: var(--muted); }
-
-    .links {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--line);
-    }
-    .links a {
-      padding: 18px;
-      border-right: 1px solid var(--line);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .links a:last-child { border-right: 0; }
-    .links a:hover { background: var(--yellow); }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 16px 22px;
-      font: 12px/1.3 var(--mono);
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-copy { border-right: 0; border-bottom: 1px solid var(--line); }
-      .band { grid-template-columns: 1fr; }
-      .band-label { border-right: 0; border-bottom: 1px solid var(--line); }
-      .process { grid-template-columns: 1fr 1fr; }
-      .process article:nth-child(2) { border-right: 0; }
-      .process article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .links { grid-template-columns: 1fr 1fr; }
-      .links a:nth-child(2) { border-right: 0; }
-      .links a:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-    }
-
-    @media (max-width: 620px) {
-      .sheet { width: calc(100% - 12px); margin: 6px auto; }
-      .utility { grid-template-columns: 1fr; }
-      .utility nav { justify-content: flex-start; }
-      .hero-copy { padding: 24px 18px; }
-      h1 { font-size: clamp(3rem, 19vw, 5rem); }
-      .hero-meta { grid-template-columns: 1fr; }
-      .hero-meta div { border-right: 0; border-bottom: 1px solid var(--line); }
-      .hero-meta div:last-child { border-bottom: 0; }
-      .proofs { grid-template-columns: 1fr; }
-      .coverage-row { grid-template-columns: 1fr; gap: 5px; }
-      .coverage-row code { text-align: left; }
-      .process, .links { grid-template-columns: 1fr; }
-      .process article, .links a { border-right: 0; border-bottom: 1px solid var(--line); }
-      .process article:last-child, .links a:last-child { border-bottom: 0; }
-      footer { flex-direction: column; }
+    @media (max-width:390px){
+      h1{font-size:2.45rem;letter-spacing:-.045em}
+      .score-grid{grid-template-columns:1fr}.metric{border-right:0!important}
     }
   </style>
 </head>
@@ -272,7 +128,6 @@
             <h1>LLM Localization QA Lab</h1>
             <p class="summary">A hands-on QA project for checking whether AI-generated copy actually works for Brazilian users—not just whether it was translated.</p>
           </div>
-
           <div class="hero-meta">
             <div><b>Focus</b>Brazilian Portuguese</div>
             <div><b>Method</b>Human evaluation</div>
@@ -307,30 +162,10 @@
         <div class="band-body">
           <h2>What failed in the pilot.</h2>
           <div class="proofs">
-            <article class="proof">
-              <span class="sev">HIGH</span>
-              <div class="id">LOCBUG-001 · REGIONAL VARIANT</div>
-              <p class="bad">Aceda às definições da sua conta.</p>
-              <p class="good">Acesse as configurações da sua conta.</p>
-            </article>
-            <article class="proof">
-              <span class="sev">HIGH</span>
-              <div class="id">LOCBUG-002 · FALSE FRIEND</div>
-              <p class="bad">Eventualmente, o problema será resolvido.</p>
-              <p class="good">No fim, o problema será resolvido.</p>
-            </article>
-            <article class="proof">
-              <span class="sev">HIGH</span>
-              <div class="id">LOCBUG-003 · DATE / TIME</div>
-              <p class="bad">Payment due: 09/21 at 8:00 PM</p>
-              <p class="good">Pagamento até 21/09 às 20h</p>
-            </article>
-            <article class="proof">
-              <span class="sev">MEDIUM</span>
-              <div class="id">LOCBUG-004 · PRODUCT TERMINOLOGY</div>
-              <p class="bad">Gerencie sua subscrição nas definições.</p>
-              <p class="good">Gerencie sua assinatura nas configurações.</p>
-            </article>
+            <article class="proof"><span class="sev">HIGH</span><div class="id">LOCBUG-001 · REGIONAL VARIANT</div><p class="bad">Aceda às definições da sua conta.</p><p class="good">Acesse as configurações da sua conta.</p></article>
+            <article class="proof"><span class="sev">HIGH</span><div class="id">LOCBUG-002 · FALSE FRIEND</div><p class="bad">Eventualmente, o problema será resolvido.</p><p class="good">No fim, o problema será resolvido.</p></article>
+            <article class="proof"><span class="sev">HIGH</span><div class="id">LOCBUG-003 · DATE / TIME</div><p class="bad">Payment due: 09/21 at 8:00 PM</p><p class="good">Pagamento até 21/09 às 20h</p></article>
+            <article class="proof"><span class="sev">MEDIUM</span><div class="id">LOCBUG-004 · PRODUCT TERMINOLOGY</div><p class="bad">Gerencie sua subscrição nas definições.</p><p class="good">Gerencie sua assinatura nas configurações.</p></article>
           </div>
         </div>
       </section>
@@ -338,14 +173,13 @@
       <section class="band">
         <div class="band-label">03 / Coverage</div>
         <div class="band-body">
-          <h2>Review dimensions.</h2>
+          <h2>What gets reviewed.</h2>
           <div class="coverage-list">
-            <div class="coverage-row"><b>Meaning preservation</b><span>Does the localized output keep the original intent and facts?</span><code>semantic</code></div>
-            <div class="coverage-row"><b>Natural PT-BR</b><span>Does it sound native instead of translated?</span><code>language</code></div>
-            <div class="coverage-row"><b>Tone & register</b><span>Does the wording fit support, product and user context?</span><code>voice</code></div>
-            <div class="coverage-row"><b>Terminology</b><span>Are SaaS, billing and account terms natural for Brazil?</span><code>product</code></div>
-            <div class="coverage-row"><b>Locale conventions</b><span>Dates, time, currency and formatting follow Brazilian expectations.</span><code>locale</code></div>
-            <div class="coverage-row"><b>Instruction following</b><span>The response respects explicit format and style constraints.</span><code>behavior</code></div>
+            <div class="coverage-row"><b>Meaning preservation</b><span>Original intent remains intact after localization.</span><code>CORE</code></div>
+            <div class="coverage-row"><b>Natural PT-BR</b><span>Wording sounds Brazilian rather than translated.</span><code>LANGUAGE</code></div>
+            <div class="coverage-row"><b>Tone & register</b><span>Support and product copy match the context.</span><code>VOICE</code></div>
+            <div class="coverage-row"><b>Terminology</b><span>SaaS and technical terms use Brazilian conventions.</span><code>PRODUCT</code></div>
+            <div class="coverage-row"><b>Locale formats</b><span>Dates, times and user-facing formats fit Brazil.</span><code>LOCALE</code></div>
           </div>
         </div>
       </section>
@@ -353,12 +187,11 @@
       <section class="band">
         <div class="band-label">04 / Workflow</div>
         <div class="band-body">
-          <h2>How the review runs.</h2>
           <div class="process">
-            <article><b>STEP A</b><h3>Design</h3><p>Build test prompts around translation, product copy, support and locale behavior.</p></article>
-            <article><b>STEP B</b><h3>Review</h3><p>Score each answer using a dedicated localization rubric.</p></article>
-            <article><b>STEP C</b><h3>Log</h3><p>Capture defects with severity, evidence and expected correction.</p></article>
-            <article><b>STEP D</b><h3>Decide</h3><p>Issue a PT-BR readiness recommendation based on defects and thresholds.</p></article>
+            <article><b>01</b><h3>Design</h3><p>Create prompts around Brazilian product, support and translation scenarios.</p></article>
+            <article><b>02</b><h3>Review</h3><p>Score meaning, naturalness, tone, terminology and cultural fit.</p></article>
+            <article><b>03</b><h3>Log</h3><p>Capture defects with evidence, severity and recommended correction.</p></article>
+            <article><b>04</b><h3>Decide</h3><p>Issue a localization-readiness recommendation for PT-BR release.</p></article>
           </div>
         </div>
       </section>
@@ -366,11 +199,10 @@
       <section class="band">
         <div class="band-label">05 / Evidence</div>
         <div class="band-body">
-          <h2>Open the artifacts.</h2>
           <div class="links">
             <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/README.md">README</a>
-            <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/results/localization-report.md">QA report</a>
-            <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/results/localization-readiness-report.md">Readiness</a>
+            <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/results/localization-report.md">Localization report</a>
+            <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/results/localization-readiness-report.md">Readiness report</a>
             <a href="https://github.com/guilhermeTavo/llm-localization-qa-lab/blob/main/results/defect-log.csv">Defect log</a>
           </div>
         </div>
@@ -378,7 +210,7 @@
     </main>
 
     <footer>
-      <span>Guilherme Tavares · AI Quality / Localization QA / LLM Evaluation</span>
+      <span>Guilherme Tavares · AI Quality / Localization QA</span>
       <span><a href="https://www.linkedin.com/in/guilherme-tavares-398563240/">LinkedIn</a> · <a href="https://github.com/guilhermeTavo">GitHub</a></span>
     </footer>
   </div>
